@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ananya Biswas — EIE Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f4f0;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --subtle: #9a9a9a;
+  --border: #e2e0da;
+  --accent: #2651c4;
+  --accent-light: #eef1fb;
+  --accent-muted: #7a95e0;
+  --green: #1a6b3c;
+  --green-light: #e8f5ee;
+  --sans: 'Sora', sans-serif;
+  --serif: 'Lora', serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.6; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(245,244,240,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2.5rem; height: 56px;
+}
+.nav-name { font-size: 0.9rem; font-weight: 500; }
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; transition: background 0.15s, color 0.15s; }
+.nav-links a:hover { background: var(--border); color: var(--text); }
+
+/* PAGE */
+.page { max-width: 1060px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+/* HERO */
+.hero-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 20px;
+  padding: 3rem; margin-bottom: 1.25rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.25rem;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.hero-name { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 500; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+.hero-name em { font-style: italic; color: var(--accent); }
+.hero-sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; line-height: 1.7; }
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1.4rem; font-family: var(--sans); font-size: 0.82rem; font-weight: 500; border-radius: 10px; text-decoration: none; transition: all 0.15s; cursor: pointer; border: none; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #1e45b0; }
+.btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.hero-right { display: flex; flex-direction: column; gap: 0.75rem; min-width: 180px; }
+.hero-stat { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; text-align: right; }
+.hero-stat-num { font-family: var(--serif); font-size: 1.9rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.2rem; }
+.hero-stat-label { font-size: 0.75rem; color: var(--muted); }
+
+/* BENTO */
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; overflow: hidden; }
+.card-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--subtle); margin-bottom: 1.25rem; }
+.card-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; margin-bottom: 1.25rem; line-height: 1.2; }
+.span-5 { grid-column: span 5; }
+.span-7 { grid-column: span 7; }
+.span-4 { grid-column: span 4; }
+.span-8 { grid-column: span 8; }
+.span-6 { grid-column: span 6; }
+.span-12 { grid-column: span 12; }
+
+/* ABOUT */
+.about-text { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+.about-text + .about-text { margin-top: 0.75rem; }
+.about-text strong { color: var(--text); font-weight: 500; }
+
+/* SKILLS */
+.skill-group { margin-bottom: 1.25rem; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 0.6rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.3rem 0.7rem; font-size: 0.78rem; color: var(--text); font-weight: 400; }
+.tag-accent { background: var(--accent-light); border-color: var(--accent-muted); color: var(--accent); font-weight: 500; }
+
+/* EXPERIENCE */
+.exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.exp-item { position: relative; padding-left: 1rem; border-left: 2px solid var(--border); }
+.exp-item.current { border-left-color: var(--accent); }
+.exp-company { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.1rem; }
+.exp-role { font-family: var(--serif); font-style: italic; font-size: 1.05rem; margin-bottom: 0.25rem; }
+.exp-meta { font-size: 0.75rem; color: var(--subtle); margin-bottom: 0.5rem; }
+.exp-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.6rem; }
+.exp-skills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.exp-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: var(--green-light); color: var(--green); padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.5rem; }
+.exp-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+/* EDUCATION */
+.edu-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.edu-item { display: grid; grid-template-columns: 56px 1fr; gap: 1rem; align-items: start; }
+.edu-year { font-size: 0.7rem; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; padding-top: 3px; }
+.edu-degree { font-weight: 500; font-size: 0.88rem; margin-bottom: 0.15rem; }
+.edu-school { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.2rem; }
+.edu-grade { font-size: 0.72rem; color: var(--subtle); }
+.edu-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.4rem; }
+.edu-tag { font-size: 0.68rem; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 0.15rem 0.5rem; color: var(--muted); }
+.edu-divider { height: 1px; background: var(--border); margin: 0.25rem 0 0.25rem 4.5rem; }
+
+/* PROJECT CARD */
+.project-item { background: var(--bg); border-radius: 12px; padding: 1.25rem; margin-bottom: 0.75rem; }
+.project-item:last-child { margin-bottom: 0; }
+.project-name { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.2rem; }
+.project-meta { font-size: 0.72rem; color: var(--subtle); margin-bottom: 0.6rem; }
+.project-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.75rem; }
+
+/* LANGUAGES */
+.lang-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.lang-item { background: var(--bg); border-radius: 10px; padding: 0.85rem 1rem; }
+.lang-name { font-weight: 500; font-size: 0.85rem; margin-bottom: 0.15rem; }
+.lang-level { font-size: 0.72rem; color: var(--subtle); }
+.lang-bar { height: 3px; background: var(--border); border-radius: 100px; margin-top: 0.5rem; overflow: hidden; }
+.lang-fill { height: 100%; background: var(--accent); border-radius: 100px; }
+
+/* VOLUNTEERING */
+.vol-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg); border-radius: 10px; }
+.vol-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.vol-name { font-weight: 500; font-size: 0.88rem; margin-bottom: 0.1rem; }
+.vol-meta { font-size: 0.75rem; color: var(--subtle); }
+.vol-type { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
+
+/* ORG */
+.org-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg); border-radius: 10px; }
+.org-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.org-name { font-weight: 500; font-size: 0.88rem; margin-bottom: 0.1rem; }
+.org-meta { font-size: 0.75rem; color: var(--subtle); }
+.org-assoc { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
+
+/* CONTACT */
+.contact-card { background: var(--accent); border-color: var(--accent); }
+.contact-card .card-label { color: rgba(255,255,255,0.55); }
+.contact-card .card-title { color: #fff; margin-bottom: 0.5rem; }
+.contact-intro { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 1.75rem; line-height: 1.65; }
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-link { display: flex; align-items: center; gap: 0.75rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.85rem 1rem; text-decoration: none; color: #fff; font-size: 0.82rem; transition: background 0.15s; }
+.contact-link:hover { background: rgba(255,255,255,0.2); }
+.contact-link-icon { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; min-width: 52px; }
+
+/* LOCATION */
+.location-card { background: var(--text); border-color: var(--text); }
+.location-card .card-label { color: rgba(255,255,255,0.4); }
+.location-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); color: #fff; font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 100px; margin-bottom: 0.5rem; margin-right: 0.4rem; }
+.location-pill::before { content: '📍'; font-size: 0.8rem; }
+
+/* CERT */
+.cert-item { display: flex; align-items: center; gap: 1rem; background: var(--bg); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+.cert-item:last-child { margin-bottom: 0; }
+.cert-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.cert-name { font-weight: 500; font-size: 0.88rem; margin-bottom: 0.1rem; }
+.cert-issuer { font-size: 0.75rem; color: var(--subtle); }
+
+footer { text-align: center; padding: 3rem 2rem 2rem; font-size: 0.75rem; color: var(--subtle); letter-spacing: 0.04em; }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .hero-card { grid-template-columns: 1fr; }
+  .hero-right { flex-direction: row; flex-wrap: wrap; }
+  .hero-stat { flex: 1; min-width: 130px; }
+  .span-5,.span-7,.span-4,.span-8,.span-6 { grid-column: span 12; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .page { padding: 1.5rem 1rem 4rem; }
+  .hero-card { padding: 2rem 1.5rem; }
+  .card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Ananya Biswas</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero-card fade-up">
+    <div>
+      <div class="hero-tag">Electronics &amp; Instrumentation Engineering</div>
+      <h1 class="hero-name">Ananya <em>Biswas</em></h1>
+      <p class="hero-sub">First-year EIE student at Ramaiah Institute of Technology, Bangalore — exploring embedded systems, semiconductors, and computer science. Member of the Instrument Society of India.</p>
+      <div class="hero-actions">
+        <a href="mailto:ananyabiswas416@gmail.com" class="btn btn-primary">Get in touch</a>
+        <a href="https://www.linkedin.com/in/ananya-biswas-515637363/" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num">RIT</div>
+        <div class="hero-stat-label">Bangalore, 2025–2029</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">months at Velocita Racing</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">languages spoken</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bento" id="about">
+
+    <!-- ABOUT -->
+    <div class="card span-7 fade-up">
+      <div class="card-label">About</div>
+      <div class="card-title">Hardware meets software</div>
+      <p class="about-text">I'm a first-year <strong>Electronics and Instrumentation Engineering</strong> student at Ramaiah Institute of Technology, Bangalore — passionate about how circuits, sensors, and code come together to solve real-world problems.</p>
+      <p class="about-text" style="margin-top:0.85rem;">My interests span <strong>embedded systems</strong>, <strong>semiconductors</strong>, and <strong>computer science</strong>. I'm a member of the <strong>Instrument Society of India (ISOI)</strong> through RIT and have hands-on experience from both research projects and competitive engineering roles.</p>
+      <p class="about-text" style="margin-top:0.85rem;">Open to internships, collaborations, and projects that help me grow technically and contribute to meaningful innovation.</p>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="card span-5 fade-up">
+      <div class="card-label">Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools &amp; Technologies</div>
+        <div class="tags">
+          <span class="tag tag-accent">KiCAD</span>
+          <span class="tag tag-accent">SOLIDWORKS</span>
+          <span class="tag tag-accent">Python</span>
+          <span class="tag tag-accent">C</span>
+          <span class="tag tag-accent">Arduino</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Industry Knowledge</div>
+        <div class="tags">
+          <span class="tag">Data Acquisition</span>
+          <span class="tag">Data Collection &amp; Analysis</span>
+          <span class="tag">Research Skills</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Semiconductors</span>
+          <span class="tag">Project Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Interpersonal</div>
+        <div class="tags">
+          <span class="tag">Leadership</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Creativity &amp; Innovation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="card span-6 fade-up" id="experience">
+      <div class="card-label">Experience</div>
+      <div class="card-title">Work &amp; roles</div>
+      <div class="exp-list">
+        <div class="exp-item current">
+          <div class="exp-badge">Current role</div>
+          <div class="exp-company">Velocita Racing</div>
+          <div class="exp-role">Junior Suspensions Engineer</div>
+          <div class="exp-meta">Mar 2026 – Present · 4 months · Bengaluru, On-site</div>
+          <div class="exp-desc">Working on suspension system design and analysis, applying engineering principles to optimise vehicle dynamics under competitive conditions.</div>
+          <div class="exp-skills">
+            <span class="tag" style="font-size:0.72rem;">Project Management</span>
+            <span class="tag" style="font-size:0.72rem;">SOLIDWORKS</span>
+            <span class="tag" style="font-size:0.72rem;">Teamwork</span>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-company">Velocita Racing</div>
+          <div class="exp-role">Junior Electricals Engineer</div>
+          <div class="exp-meta">Nov 2025 – Mar 2026 · 5 months · Bengaluru, On-site</div>
+          <div class="exp-desc">Contributed to vehicle electrical systems — wiring, sensors, and data acquisition — ensuring reliable performance on the track.</div>
+          <div class="exp-skills">
+            <span class="tag" style="font-size:0.72rem;">Data Acquisition</span>
+            <span class="tag" style="font-size:0.72rem;">Data Collection &amp; Analysis</span>
+            <span class="tag" style="font-size:0.72rem;">Scientific Communication</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="card span-6 fade-up" id="projects">
+      <div class="card-label">Projects</div>
+      <div class="card-title">What I've built</div>
+
+      <div class="project-item">
+        <div class="project-name">LPG Leak Detection System with Automated Ventilation</div>
+        <div class="project-meta">Feb – Jun 2026 · RIT, Dept. of Electronics &amp; Instrumentation</div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:var(--green-light);color:var(--green);font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:100px;margin-bottom:0.65rem;">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;"></span>
+          Selected for Pradarshana Techfest
+        </div>
+        <div class="project-desc">Designed and built a hardware prototype using Arduino Uno and an MQ-6 gas sensor to detect LPG leaks in real time, triggering automated ventilation before gas reaches the Lower Explosive Limit. Engineered a servo motor-actuated 3D-printed louvered window mechanism with a torsion spring fail-safe — no human intervention required, even during power outages. Implemented a firmware averaging algorithm to filter false alarms from cooking fumes. Selected to represent the EIE department at Pradarshana, RIT's annual techfest (one team per branch chosen from all first-year projects).</div>
+        <div class="tags">
+          <span class="tag tag-accent">Arduino (C/C++)</span>
+          <span class="tag tag-accent">SOLIDWORKS</span>
+          <span class="tag tag-accent">KiCAD</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Circuit Design</span>
+          <span class="tag">Research Skills</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-name">Impact of Salinity on Wave Dynamics</div>
+        <div class="project-meta">Jan 2019 · Kendriya Vidyalaya Bhandup, Mumbai</div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:var(--accent-light);color:var(--accent);font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:100px;margin-bottom:0.65rem;">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
+          NCSC — 4th Place Nationally
+        </div>
+        <div class="project-desc">Built a custom sensor using Arduino Uno, a breadboard, copper wiring, and resistors, programmed with Python to study how salinity influences wave behaviour in a small-scale ocean model. Presented at the National Children's Science Congress; awarded 4th place nationally.</div>
+        <div class="tags">
+          <span class="tag tag-accent">Python</span>
+          <span class="tag tag-accent">Arduino</span>
+          <span class="tag">Research Skills</span>
+          <span class="tag">Data Collection</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="card span-7 fade-up" id="education">
+      <div class="card-label">Education</div>
+      <div class="card-title">Academic path</div>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-year">2025–<br>2029</div>
+          <div>
+            <div class="edu-degree">BE — Electronics &amp; Instrumentation Engineering</div>
+            <div class="edu-school">Ramaiah Institute of Technology, Bangalore</div>
+            <div class="edu-tags">
+              <span class="edu-tag">C</span><span class="edu-tag">KiCAD</span><span class="edu-tag">SOLIDWORKS</span><span class="edu-tag">Problem Solving</span><span class="edu-tag">Scientific Communication</span>
+            </div>
+          </div>
+        </div>
+        <div class="edu-divider"></div>
+        <div class="edu-item">
+          <div class="edu-year">2023–<br>2025</div>
+          <div>
+            <div class="edu-degree">Higher Secondary — PCM-PE</div>
+            <div class="edu-school">Poddar Brio International School</div>
+            <div class="edu-grade">Grade 12</div>
+            <div class="edu-tags">
+              <span class="edu-tag">Leadership</span><span class="edu-tag">Project Management</span><span class="edu-tag">Team Leadership</span>
+            </div>
+          </div>
+        </div>
+        <div class="edu-divider"></div>
+        <div class="edu-item">
+          <div class="edu-year">2013–<br>2023</div>
+          <div>
+            <div class="edu-degree">High School Diploma</div>
+            <div class="edu-school">Kendriya Vidyalaya Bhandup, Mumbai</div>
+            <div class="edu-grade">Grade 10</div>
+            <div class="edu-tags">
+              <span class="edu-tag">Leadership</span><span class="edu-tag">Project Management</span><span class="edu-tag">Team Leadership</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LANGUAGES -->
+    <div class="card span-5 fade-up">
+      <div class="card-label">Languages</div>
+      <div class="lang-grid-inner">
+        <div class="lang-item">
+          <div class="lang-name">Hindi</div>
+          <div class="lang-level">Native</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Bengali</div>
+          <div class="lang-level">Native</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">English</div>
+          <div class="lang-level">Professional</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:85%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Marathi</div>
+          <div class="lang-level">Limited</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:45%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">German</div>
+          <div class="lang-level">Limited</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:40%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Kannada</div>
+          <div class="lang-level">Elementary</div>
+          <div class="lang-bar"><div class="lang-fill" style="width:20%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOLUNTEERING + ORGS -->
+    <div class="card span-4 fade-up">
+      <div class="card-label">Volunteering</div>
+      <div class="vol-item">
+        <div class="vol-icon">🤝</div>
+        <div>
+          <div class="vol-name">Volunteer</div>
+          <div class="vol-meta">Robin Hood Army · Jan–May 2024 · 5 months</div>
+          <div class="vol-type">Social Services</div>
+        </div>
+      </div>
+
+      <div class="card-label" style="margin-top:1.75rem;">Organisations</div>
+      <div class="org-item">
+        <div class="org-icon">⚙️</div>
+        <div>
+          <div class="org-name">Instrument Society of India (ISOI)</div>
+          <div class="org-meta">Member · Nov 2025 – Present</div>
+          <div class="org-assoc">Ramaiah Institute of Technology</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="card span-4 fade-up">
+      <div class="card-label">Certifications</div>
+      <div class="cert-item">
+        <div class="cert-icon">🎮</div>
+        <div>
+          <div class="cert-name">The Gemini Games</div>
+          <div class="cert-issuer">Certification · 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="card location-card span-4 fade-up">
+      <div class="card-label">Location</div>
+      <div style="margin-top:0.75rem; margin-bottom:1rem;">
+        <span class="location-pill">Mumbai, India</span>
+        <span class="location-pill">Bengaluru, India</span>
+      </div>
+      <p style="font-size:0.82rem; color:rgba(255,255,255,0.55); line-height:1.65;">Currently based in Bengaluru for studies at RIT. Originally from Mumbai.</p>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="card contact-card span-8 fade-up" id="contact">
+      <div class="card-label">Contact</div>
+      <div class="card-title">Let's connect</div>
+      <p class="contact-intro">Open to internships, collaborations, and research projects in embedded systems, electronics, and engineering. I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:ananyabiswas416@gmail.com" class="contact-link">
+          <span class="contact-link-icon">Email</span>
+          <span>ananyabiswas416@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ananya-biswas-515637363/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">LinkedIn</span>
+          <span>linkedin.com/in/ananya-biswas-515637363</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2026 Ananya Biswas · Electronics &amp; Instrumentation Engineering · RIT Bangalore</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
